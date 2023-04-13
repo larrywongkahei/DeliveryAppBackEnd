@@ -17,12 +17,8 @@ app.use(cors());
 app.use(express.json()); 
 const port = process.env.PORT || 3000
 
-app.listen(port, () => {
-    console.log(`App available at http://localhost:${port}`);
-  });
-
 app.get('/', (req, res) => {
-res.send('Hello World!');
+res.send(`${port}`);
 });
 
 app.get('/:name', (req, res) => {
