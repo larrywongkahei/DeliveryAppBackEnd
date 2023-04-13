@@ -7,6 +7,7 @@
     "server": "nodemon app.js"
   },
   "engines": {
+    "server": "nodemon app.js",
     "node": "18.x"
   },
   "keywords": ["heroku"],
