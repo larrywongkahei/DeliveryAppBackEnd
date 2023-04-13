@@ -1,0 +1,75 @@
+const express = require('express');
+const app = express()
+
+const { MongoClient } = require('mongodb');
+const cors = require('cors');
+
+const url = "mongodb+srv://makemak123:1EzPgJCW9Uw4qX3r@clusterdelivery.jz2kqb0.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(url);
+
+const db = client.db('BMG')
+const coll = db.collection('Users')
+const { signup, checkIfUserExist, updateSignUpForm, getWorkdays, updateDelivery, deleteDelivery } = require('./apiFunctions')
+
+client.connect();
+
+app.use(cors());
+app.use(express.json()); 
+
+app.get('/:name', (req, res) => {
+    const name = req.params.name
+    getWorkdays(name, coll)
+    .then(data => res.json(data))
+})
+
+
+app.get('/deliveries', (req, res) => {
+    coll.find().toArray()
+    .then(res.sendStatus(200))
+    })
+
+
+app.post('/createuser', (req, res) => {
+    signup(req.body, coll)
+    .then(response => {
+        if (response){
+            res.sendStatus(200)
+        }else{
+            res.sendStatus(400)
+        }
+    })
+})
+
+app.post('/login', (req, res) => {
+    checkIfUserExist(req.body, coll)
+    .then(response => {
+        if (response){
+            res.sendStatus(200)
+        }else{
+            res.sendStatus(500)
+        }
+    })
+    
+})
+
+app.put('/update', (req, res) => {
+    updateSignUpForm(req.body, coll)
+    .then(res.sendStatus(200))
+})
+
+app.put('/addDelivery', (req, res) => {
+    updateDelivery(req.body, coll)
+    .then(data => res.json(data))
+})
+
+app.put('/deleteDelivery', (req, res) => {
+    deleteDelivery(req.body, coll)
+    .then(response => {
+        res.json(response)
+        res.status(200)
+    })
+})
+
+app.listen(3000);
+
+
