@@ -15,6 +15,15 @@ client.connect();
 
 app.use(cors());
 app.use(express.json()); 
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+    console.log(`App available at http://localhost:${port}`);
+  });
+
+app.get('/', (req, res) => {
+res.send('Hello World!');
+});
 
 app.get('/:name', (req, res) => {
     const name = req.params.name
@@ -70,6 +79,5 @@ app.put('/deleteDelivery', (req, res) => {
     })
 })
 
-app.listen(3000);
 
 
