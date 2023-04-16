@@ -85,6 +85,16 @@ async function deleteDelivery(data, collection){
     
 }
 
+async function checkUser(email, collection){
+    const user = await collection.find({'email':email}).toArray()
+    if(user){
+        return user[0]
+    }else{
+        return false
+    }
+}
+
+
 
 module.exports = {
     signup,
@@ -93,5 +103,6 @@ module.exports = {
     updateSignUpForm,
     getWorkdays,
     updateDelivery,
-    deleteDelivery
+    deleteDelivery,
+    checkUser
 }

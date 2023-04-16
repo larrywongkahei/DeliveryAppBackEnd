@@ -9,7 +9,7 @@ const client = new MongoClient(url);
 
 const db = client.db('BMG')
 const coll = db.collection('Users')
-const { signup, checkIfUserExist, updateSignUpForm, getWorkdays, updateDelivery, deleteDelivery } = require('./apiFunctions')
+const { signup, checkIfUserExist, updateSignUpForm, getWorkdays, updateDelivery, deleteDelivery, checkUser } = require('./apiFunctions')
 
 client.connect();
 
@@ -25,8 +25,14 @@ res.send(`${port}`);
 
 app.get('/data', (req, res) => {
     const name = req.query.name
-    getWorkdays(name, coll)
-    .then(data => res.json(data))
+    const email = req.query.email
+    if(name){
+        getWorkdays(name, coll)
+        .then(data => res.json(data))
+    }else{
+        checkUser(email, coll)
+        .then(data => {if(!data){res.sendStatus(400)}})
+    }
 })
 
 
