@@ -33,9 +33,9 @@ app.get('/data', (req, res) => {
         checkUser(email, coll)
         .then(response => {
             if(response){
-                res.sendStatus(400)
-            }else{
                 res.sendStatus(200)
+            }else{
+                res.sendStatus(400)
             }
         })
     }
