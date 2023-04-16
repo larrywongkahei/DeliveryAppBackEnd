@@ -90,6 +90,7 @@ async function checkUser(email, collection){
     if(user.length < 1){
         return false
     }
+    return true
 }
 
 
