@@ -44,7 +44,11 @@ async function updateSignUpForm(data, collection){
 
 async function getWorkdays(name, collection){
     const user = await collection.find({'username':name}).toArray()
-    return user[0]
+    if(user){
+        return user[0]
+    }else{
+        return false
+    }
 }
 
 async function updateDelivery(data, collection){
