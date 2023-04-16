@@ -31,7 +31,13 @@ app.get('/data', (req, res) => {
         .then(data => res.json(data))
     }else{
         checkUser(email, coll)
-        .then(data => {if(!data){res.sendStatus(400)}})
+        .then(response => {
+            if(response){
+                res.sendStatus(400)
+            }else{
+                res.sendStatus(200)
+            }
+        })
     }
 })
 
