@@ -9,7 +9,7 @@ const client = new MongoClient(url);
 
 const db = client.db('BMG')
 const coll = db.collection('Users')
-const { signup, checkIfUserExist, updateSignUpForm, getWorkdays, updateDelivery, deleteDelivery, checkUser } = require('./apiFunctions')
+const { signup, checkIfUserExist, updateSignUpForm, getWorkdays, updateDelivery, deleteDelivery, checkUser, changePassword } = require('./apiFunctions')
 
 client.connect();
 
@@ -58,6 +58,15 @@ app.post('/createuser', (req, res) => {
         }
     })
 })
+
+app.put('/changePassword'), (req, res) => {
+    changePassword(req.body, coll)
+    .then(response => {
+        if(response){
+            res.sendStatus(200)
+        }
+    })
+}
 
 app.post('/login', (req, res) => {
     checkIfUserExist(req.body, coll)
