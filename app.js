@@ -64,6 +64,8 @@ app.put('/changePassword'), (req, res) => {
     .then(response => {
         if(response){
             res.sendStatus(200)
+        }else{
+            res.sendStatus(400)
         }
     })
 }
