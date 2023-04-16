@@ -96,7 +96,7 @@ async function checkUser(email, collection){
 async function changePassword(data, collection){
     const user = await collection.find({'email':data.email}).toArray()
     const newUser = {...user[0]}
-    newUser.password === data.password
+    newUser.password = data.password
     await collection.updateMany({'email':data.email}, {$set:newUser})
     return true
 }
