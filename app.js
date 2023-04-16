@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 res.send(`${port}`);
 });
 
-app.get('/:name', (req, res) => {
+app.get('/data', (req, res) => {
     const name = req.params.name
     getWorkdays(name, coll)
     .then(data => res.json(data))
