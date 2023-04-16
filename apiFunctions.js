@@ -87,9 +87,7 @@ async function deleteDelivery(data, collection){
 
 async function checkUser(email, collection){
     const user = await collection.find({'email':email}).toArray()
-    if(user){
-        return user[0]
-    }else{
+    if(user.length < 1){
         return false
     }
 }
