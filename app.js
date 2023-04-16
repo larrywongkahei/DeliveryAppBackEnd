@@ -59,7 +59,7 @@ app.post('/createuser', (req, res) => {
     })
 })
 
-app.put('/changePassword'), (req, res) => {
+app.put('/changePassword', (req, res) => {
     changePassword(req.body, coll)
     .then(response => {
         if(response){
@@ -68,7 +68,7 @@ app.put('/changePassword'), (req, res) => {
             res.sendStatus(400)
         }
     })
-}
+})
 
 app.post('/login', (req, res) => {
     checkIfUserExist(req.body, coll)
