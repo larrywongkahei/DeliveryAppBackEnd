@@ -24,7 +24,7 @@ res.send(`${port}`);
 });
 
 app.get('/data', (req, res) => {
-    const name = req.params.name
+    const name = req.query.name
     getWorkdays(name, coll)
     .then(data => res.json(data))
 })
