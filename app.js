@@ -4,7 +4,7 @@ const app = express()
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
 
-const url = "mongodb+srv://makemak123:1EzPgJCW9Uw4qX3r@clusterdelivery.jz2kqb0.mongodb.net/?retryWrites=true&w=majority";
+const url = "mongodb+srv://makemak123:'password'@clusterdelivery.jz2kqb0.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(url);
 
 const db = client.db('BMG')
